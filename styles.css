@@ -276,7 +276,8 @@ span.amp[data-lang],
   position: relative;
 }
 .section.welcome  { background: var(--cream); }
-.section.schedule { background: var(--ivory); }
+.section.story    { background: var(--ivory); }
+.section.schedule { background: var(--cream); }
 .section.venue    { background: var(--cream); }
 .section.dress    { background: var(--ivory); }
 .section.rsvp     { background: var(--deep-teal); color: var(--ivory); }
@@ -331,6 +332,24 @@ span.amp[data-lang],
 .section.rsvp .note { color: rgba(247, 243, 234, 0.78); }
 .note strong { font-weight: 500; color: var(--ink); }
 .section.rsvp .note strong { color: var(--ivory); }
+
+/* === Story === */
+.story-body {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.story-divider {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  color: var(--champagne);
+  margin: 24px 0 36px;
+  letter-spacing: 0.5em;
+  user-select: none;
+}
 
 /* === Schedule === */
 .timeline {
