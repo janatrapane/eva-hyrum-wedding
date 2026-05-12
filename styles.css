@@ -633,7 +633,28 @@ span.amp[data-lang],
   .nav { padding: 14px 20px; }
   .nav.scrolled { padding: 10px 20px; }
 
-  .hero-image { object-position: 62% 30%; }
+  .hero {
+    min-height: auto;
+    padding: 0;
+    display: block;
+    color: var(--ivory);
+  }
+  .hero-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: 60% 22%;
+    filter: brightness(0.95) saturate(0.92);
+  }
+  .hero-overlay { display: none; }
+  .hero-content {
+    background: var(--navy);
+    padding: 56px 24px 56px;
+    text-align: center;
+  }
+  .hero-scroll { display: none; }
   .hero-eyebrow, .hero-invite, .hero-location { letter-spacing: 0.25em; }
   .hero-date {
     gap: 8px;
