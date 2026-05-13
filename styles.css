@@ -643,9 +643,9 @@ span.amp[data-lang],
     position: relative;
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
-    object-position: 55% 30%;
+    object-position: 78% 25%;
     filter: brightness(0.96) saturate(0.95);
   }
   .hero-overlay { display: none; }
