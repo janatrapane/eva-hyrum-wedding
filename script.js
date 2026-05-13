@@ -14,6 +14,15 @@
     document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.langBtn === lang);
     });
+    document.querySelectorAll('[data-lang-only]').forEach((el) => {
+      const show = el.dataset.langOnly === lang;
+      el.hidden = !show;
+      if (show && el.classList.contains('reveal')) el.classList.add('in');
+    });
+    document.querySelectorAll('[data-href-en][data-href-lv]').forEach((el) => {
+      const next = lang === 'lv' ? el.dataset.hrefLv : el.dataset.hrefEn;
+      if (next) el.setAttribute('href', next);
+    });
     try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
   }
 
@@ -39,7 +48,6 @@
   onScroll();
 
   // ---------- Countdown to 14.07.2026 16:00 Europe/Riga ----------
-  // Riga is UTC+3 in July (EEST). Target: 2026-07-14T16:00:00+03:00 = 13:00 UTC
   const target = new Date('2026-07-14T16:00:00+03:00').getTime();
   const elDays = document.querySelector('[data-cd="days"]');
   const elHours = document.querySelector('[data-cd="hours"]');
@@ -82,24 +90,48 @@
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-  // ---------- Copy address for taxi ----------
-  const copyBtn = document.getElementById('copy-address');
-  if (copyBtn) {
-    const addr = 'Buļļu iela 16, Rīga, LV-1007';
-    copyBtn.addEventListener('click', async () => {
+  // ---------- Copy address buttons ----------
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (_) {}
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
       try {
-        await navigator.clipboard.writeText(addr);
-        const spans = copyBtn.querySelectorAll('span');
-        const originals = Array.from(spans).map((s) => s.textContent);
-        spans.forEach((s, i) => {
-          s.textContent = s.dataset.lang === 'lv' ? 'Nokopēts!' : 'Copied!';
-        });
-        setTimeout(() => {
-          spans.forEach((s, i) => { s.textContent = originals[i]; });
-        }, 1800);
-      } catch (e) {
-        window.prompt('Copy address:', addr);
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (_) {}
+    }
+    return fallbackCopy(text);
+  }
+
+  document.querySelectorAll('.copy-address').forEach((btn) => {
+    const address = btn.dataset.address;
+    if (!address) return;
+    btn.addEventListener('click', async () => {
+      const ok = await copyText(address);
+      const spans = btn.querySelectorAll('span[data-lang]');
+      const originals = Array.from(spans).map((s) => s.textContent);
+      spans.forEach((s) => {
+        if (s.dataset.lang === 'lv') s.textContent = ok ? 'Nokopēts!' : 'Neizdevās';
+        else s.textContent = ok ? 'Copied!' : 'Copy failed';
+      });
+      setTimeout(() => {
+        spans.forEach((s, i) => { s.textContent = originals[i]; });
+      }, 1800);
+      if (!ok) {
+        window.prompt('Copy address:', address);
       }
     });
-  }
+  });
 })();

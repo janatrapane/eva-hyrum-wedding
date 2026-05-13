@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20260513-3" />
+  <link rel="stylesheet" href="styles.css?v=20260513-4" />
 </head>
 <body>
 
@@ -158,7 +158,7 @@
       <p class="venue-address">Buļļu iela 16, Kurzemes rajons, Rīga, LV-1007</p>
 
       <div class="cta-row">
-        <button type="button" class="btn-outline" id="copy-address">
+        <button type="button" class="btn-outline copy-address" data-address="Buļļu iela 16, Rīga, LV-1007">
           <span data-lang="en">Copy address for taxi</span>
           <span data-lang="lv">Kopēt adresi taksometram</span>
         </button>
@@ -166,7 +166,7 @@
           <span data-lang="en">Open in Google Maps</span>
           <span data-lang="lv">Atvērt Google Maps</span>
         </a>
-        <a class="btn-outline" target="_blank" rel="noopener" href="https://bolt.eu/">
+        <a class="btn-outline bolt-link" target="_blank" rel="noopener" href="https://bolt.eu/en/" data-href-en="https://bolt.eu/en/" data-href-lv="https://bolt.eu/lv/">
           <span data-lang="en">Order a Bolt</span>
           <span data-lang="lv">Pasūtīt Bolt</span>
         </a>
@@ -226,39 +226,36 @@
           <p class="rsvp-card-hint" data-lang="en">Call · SMS · WhatsApp</p>
           <p class="rsvp-card-hint" data-lang="lv">Zvans · SMS · WhatsApp</p>
         </div>
-        <div class="rsvp-card">
-          <p class="rsvp-card-label" data-lang="en">For flights &amp; airport pick-up</p>
-          <p class="rsvp-card-label" data-lang="lv">Lidojumiem un sagaidīšanai lidostā</p>
+        <div class="rsvp-card" data-lang-only="en">
+          <p class="rsvp-card-label">For flights &amp; airport pick-up</p>
           <p class="rsvp-card-name">Hyrum</p>
           <a class="rsvp-card-link" href="tel:+17804993553">+1 (780) 499-3553</a>
-          <p class="rsvp-card-hint" data-lang="en">Call · SMS · WhatsApp</p>
-          <p class="rsvp-card-hint" data-lang="lv">Zvans · SMS · WhatsApp</p>
+          <p class="rsvp-card-hint">Call · SMS · WhatsApp</p>
         </div>
       </div>
 
-      <p class="note" data-lang="en"><strong>Travelling from abroad?</strong> Please send Hyrum your arrival date, departure date, and flight numbers so airport pick-ups can be arranged.</p>
-      <p class="note" data-lang="lv"><strong>Ierodaties no ārzemēm?</strong> Lūdzam atsūtīt Hyrumam ielidošanas un izlidošanas datumus, kā arī lidojumu numurus, lai varētu noorganizēt sagaidīšanu lidostā.</p>
+      <p class="note" data-lang-only="en"><strong>Travelling from abroad?</strong> Please send Hyrum your arrival date, departure date, and flight numbers so airport pick-ups can be arranged.</p>
 
       <p class="note" data-lang="en"><strong>Dietary requirements.</strong> Please let us know if you have any allergies or dietary needs.</p>
       <p class="note" data-lang="lv"><strong>Uztura ierobežojumi.</strong> Lūdzam informēt par alerģijām vai īpašām uztura vajadzībām.</p>
     </div>
   </section>
 
-  <section class="section stay reveal" id="stay">
+  <section class="section stay reveal" id="stay" data-lang-only="en">
     <div class="container narrow center">
-      <p class="kicker" data-lang="en">Where to stay</p>
-      <p class="kicker" data-lang="lv">Naktsmītne</p>
-      <h2 class="section-title" data-lang="en">Stay with us at home</h2>
-      <h2 class="section-title" data-lang="lv">Palieciet pie mums</h2>
+      <p class="kicker">Where to stay</p>
+      <h2 class="section-title">Stay with us at home</h2>
 
-      <p class="lead" data-lang="en">Guests travelling from afar are warmly invited to stay at Eva's family home in Berģi.</p>
-      <p class="lead" data-lang="lv">Viesus, kas ieradušies no tālienes, sirsnīgi aicinām palikt Evas ģimenes mājās Berģos.</p>
+      <p class="lead">Guests travelling from afar are warmly invited to stay at Eva's family home in Berģi.</p>
 
       <p class="venue-address">Rožu prospekts 72, Berģi</p>
-      <p class="note" data-lang="en">In Waze, please search for <strong>Moru iela 1, Berģi</strong> — it leads to the same location.</p>
-      <p class="note" data-lang="lv">Waze lietotnē ievadiet adresi <strong>Moru iela 1, Berģi</strong> - tā ved uz to pašu vietu.</p>
+      <p class="note">In Waze, please search for <strong>Moru iela 1, Berģi</strong> - it leads to the same location.</p>
 
       <div class="cta-row">
+        <button type="button" class="btn-outline copy-address" data-address="Rožu prospekts 72, Berģi">
+          <span data-lang="en">Copy address</span>
+          <span data-lang="lv">Kopēt adresi</span>
+        </button>
         <a class="btn-outline" target="_blank" rel="noopener" href="https://waze.com/ul?q=Moru+iela+1+Be%C4%A3%C4%A3i">
           <span data-lang="en">Open in Waze</span>
           <span data-lang="lv">Atvērt Waze</span>
@@ -332,6 +329,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260513-1"></script>
+  <script src="script.js?v=20260513-4"></script>
 </body>
 </html>
