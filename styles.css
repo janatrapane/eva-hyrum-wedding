@@ -285,8 +285,22 @@ span.amp[data-lang],
 .section.venue    { background: var(--cream); }
 .section.dress    { background: var(--ivory); }
 .section.rsvp     { background: var(--deep-teal); color: var(--ivory); }
+.section.pavadoni { background: var(--champagne); }
 .section.stay     { background: var(--cream); }
 .section.details  { background: var(--ivory); }
+
+.section.pavadoni .kicker { color: var(--deep-teal); }
+.section.pavadoni .section-title { color: var(--navy); }
+.section.pavadoni .lead { color: var(--ink); font-style: normal; }
+.section.pavadoni .lead strong { color: var(--deep-teal); font-weight: 500; }
+
+.pavadoni-card {
+  background: var(--ivory);
+  padding: clamp(40px, 6vw, 64px) clamp(28px, 5vw, 56px);
+  border: 1px solid var(--beige);
+  border-radius: 2px;
+  box-shadow: 0 12px 40px rgba(31, 42, 38, 0.08);
+}
 
 .container { max-width: 1100px; margin: 0 auto; }
 .container.narrow { max-width: 720px; }
