@@ -365,7 +365,7 @@ span.amp[data-lang],
 .timeline::before {
   content: '';
   position: absolute;
-  left: 88px;
+  left: 104px;
   top: 12px;
   bottom: 12px;
   width: 1px;
@@ -382,7 +382,7 @@ span.amp[data-lang],
 .tl-item::before {
   content: '';
   position: absolute;
-  left: 84px;
+  left: 100px;
   top: 22px;
   width: 9px;
   height: 9px;
