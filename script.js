@@ -1,8 +1,6 @@
 (function () {
   'use strict';
 
-  // ---------- Language toggle (EN / LV) ----------
-  const LANG_KEY = 'eva-hyrum-lang';
   const supported = ['en', 'lv'];
 
   function setLang(lang) {
@@ -23,20 +21,10 @@
       const next = lang === 'lv' ? el.dataset.hrefLv : el.dataset.hrefEn;
       if (next) el.setAttribute('href', next);
     });
-    try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
   }
 
-  document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
-    btn.addEventListener('click', () => setLang(btn.dataset.langBtn));
-  });
-
-  let initial = 'en';
-  try {
-    const stored = localStorage.getItem(LANG_KEY);
-    if (stored && supported.includes(stored)) initial = stored;
-    else if ((navigator.language || '').toLowerCase().startsWith('lv')) initial = 'lv';
-  } catch (_) {}
-  setLang(initial);
+  const pageLang = (document.documentElement.getAttribute('lang') || 'en').toLowerCase();
+  setLang(supported.includes(pageLang) ? pageLang : 'en');
 
   // ---------- Nav scrolled state ----------
   const nav = document.querySelector('.nav');

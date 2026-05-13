@@ -90,7 +90,8 @@ span.amp[data-lang],
   transition: color 0.4s ease;
 }
 .nav.scrolled .lang-switch { color: var(--navy); }
-.lang-switch button {
+.lang-switch button,
+.lang-switch a {
   background: transparent;
   border: none;
   color: inherit;
@@ -100,10 +101,13 @@ span.amp[data-lang],
   cursor: pointer;
   opacity: 0.55;
   padding: 4px 2px;
+  text-decoration: none;
   transition: opacity 0.2s ease;
 }
-.lang-switch button.active { opacity: 1; border-bottom: 1px solid currentColor; }
-.lang-switch button:hover { opacity: 1; }
+.lang-switch button.active,
+.lang-switch a.active { opacity: 1; border-bottom: 1px solid currentColor; }
+.lang-switch button:hover,
+.lang-switch a:hover { opacity: 1; }
 .lang-sep { opacity: 0.4; }
 
 /* === Hero === */
