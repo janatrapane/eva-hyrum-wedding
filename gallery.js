@@ -38,6 +38,8 @@
   onScroll();
 
   // ---------- Reveal ----------
+  // threshold 0 - garām sekcijām (galerija telefonā ir ~15000px) procentuālais
+  // slieksnis nekad nenostrādā un sekcija paliek neredzama
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -45,7 +47,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
 
   // ---------- Galerija ----------
@@ -273,6 +275,11 @@
         if (ch.photos.length) renderChapter(container, ch);
       });
       setLang(document.documentElement.lang);
+      // drošībai: garās sekcijas atklāj uzreiz - telefonā reveal var nenostrādāt
+      ['gallery', 'share'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.add('in');
+      });
     });
 
   // atgriezties augšā
