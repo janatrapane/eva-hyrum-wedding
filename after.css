@@ -1,6 +1,7 @@
 /* After-wedding page: video, gallery, lightbox */
 
 .hero-after .hero-content { justify-content: flex-end; padding-bottom: 9vh; }
+.hero-after .hero-image { object-position: center 22%; }
 
 .video-section .video-wrap {
   max-width: 900px;
@@ -206,16 +207,16 @@
 .footer-credits .credit-link { border-bottom-color: rgba(244, 241, 234, 0.35); }
 
 /* Footer */
-.footer { background: #1a2332; color: #f4f1ea; padding: 3.6rem 0 3.2rem; text-align: center; }
+.footer { background: #1a2332; color: #f4f1ea; padding: 2.4rem 0 2.2rem; text-align: center; }
 .footer-monogram { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; letter-spacing: 0.25em; margin: 0; }
 .footer-date { letter-spacing: 0.3em; font-size: 0.85rem; margin: 0.5rem 0 0; opacity: 0.8; }
-.footer-love { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; margin: 1.4rem 0 0; }
+.footer-love { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; margin: 0.9rem 0 0; }
 .footer-tagrow {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin: 1.5rem 0 0;
+  margin: 1.1rem 0 0;
 }
 .footer-pill {
   font-family: 'Inter', sans-serif;
@@ -230,37 +231,18 @@
 }
 a.footer-pill:hover { opacity: 1; background: rgba(244, 241, 234, 0.08); }
 .footer-pill-static { opacity: 0.6; }
-.footer-rule {
-  width: 64px;
-  height: 1px;
-  background: rgba(244, 241, 234, 0.3);
-  margin: 2.4rem auto 2.2rem;
+.footer-credits-line {
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  line-height: 2;
+  opacity: 0.6;
+  max-width: 640px;
+  margin: 1.3rem auto 0;
 }
-.footer-credits-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.6rem 1.2rem;
-  max-width: 720px;
-  margin: 0 auto;
+@media (max-width: 640px) {
+  .footer { padding-bottom: 4.4rem; }
+  .footer-credits-line { padding: 0 1.2rem; }
 }
-@media (max-width: 620px) {
-  .footer-credits-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-.credit-item { display: flex; flex-direction: column; gap: 0.3rem; }
-.credit-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.66rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  opacity: 0.5;
-}
-.credit-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  color: #f4f1ea;
-  text-decoration: none;
-}
-a.credit-name:hover { opacity: 0.75; }
 
 /* Lightbox */
 .lightbox[hidden] { display: none; }
