@@ -206,10 +206,39 @@
   fetch('gallery/manifest.json')
     .then(function (r) { return r.json(); })
     .then(function (m) {
+      // ātrā navigācija pa nodaļām
+      var nav = document.getElementById('chapter-nav');
+      if (nav) {
+        m.chapters.forEach(function (ch) {
+          if (!ch.photos.length) return;
+          var a = document.createElement('a');
+          a.href = '#ch-' + ch.id;
+          var lv = document.createElement('span');
+          lv.dataset.lang = 'lv';
+          lv.textContent = ch.lv;
+          var en = document.createElement('span');
+          en.dataset.lang = 'en';
+          en.textContent = ch.en;
+          a.appendChild(lv);
+          a.appendChild(en);
+          nav.appendChild(a);
+        });
+      }
       var container = document.getElementById('chapters');
       m.chapters.forEach(function (ch) {
         if (ch.photos.length) renderChapter(container, ch);
       });
       setLang(document.documentElement.lang);
     });
+
+  // atgriezties augšā
+  var toTop = document.getElementById('to-top');
+  if (toTop) {
+    window.addEventListener('scroll', function () {
+      toTop.classList.toggle('show', window.scrollY > 1400);
+    }, { passive: true });
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 })();

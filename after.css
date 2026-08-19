@@ -46,6 +46,52 @@
 }
 .story-text .story-divider { text-align: center; }
 
+/* Chapter quick-nav */
+.chapter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 1.6rem auto 0;
+  max-width: 760px;
+}
+.chapter-nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  color: #1a2332;
+  text-decoration: none;
+  border: 1px solid rgba(26, 35, 50, 0.25);
+  border-radius: 999px;
+  padding: 0.42rem 1rem;
+  white-space: nowrap;
+}
+.chapter-nav a:hover { background: rgba(26, 35, 50, 0.07); }
+
+/* Back to top */
+.to-top {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.2rem;
+  z-index: 90;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  border: 0;
+  background: #1a2332;
+  color: #f4f1ea;
+  font-size: 1.25rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 8px 22px rgba(16, 24, 39, 0.35);
+}
+.to-top.show { opacity: 0.88; pointer-events: auto; }
+.to-top:hover { opacity: 1; }
+
+.footer-invite-link { margin: 0.9rem 0 0; font-size: 0.85rem; }
+
 /* Chapters */
 .chapter { margin-top: 3.4rem; }
 .chapter-head {
