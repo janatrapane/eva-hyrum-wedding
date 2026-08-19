@@ -88,6 +88,29 @@
     if (n >= flat.length) n = 0;
     openLb(n);
   }
+  // "Saglabāt telefonā": priekšskatījums caur Share Sheet -> Save Image -> Foto galerija
+  var lbShare = document.getElementById('lb-share');
+  if (lbShare) {
+    if (!navigator.canShare) {
+      lbShare.style.display = 'none';
+    } else {
+      lbShare.addEventListener('click', function () {
+        if (current < 0) return;
+        var f = flat[current];
+        fetch(previewUrl(f))
+          .then(function (r) { return r.blob(); })
+          .then(function (blob) {
+            var file = new File([blob], f, { type: 'image/jpeg' });
+            if (navigator.canShare({ files: [file] })) {
+              return navigator.share({ files: [file] });
+            }
+            window.open(previewUrl(f), '_blank');
+          })
+          .catch(function () { window.open(previewUrl(f), '_blank'); });
+      });
+    }
+  }
+
   lightbox.querySelector('.lb-close').addEventListener('click', closeLb);
   lightbox.querySelector('.lb-prev').addEventListener('click', function () { step(-1); });
   lightbox.querySelector('.lb-next').addEventListener('click', function () { step(1); });
