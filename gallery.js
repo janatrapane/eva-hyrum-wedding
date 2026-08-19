@@ -143,6 +143,27 @@
     head.appendChild(time);
     head.appendChild(title);
     head.appendChild(count);
+    if (chapter.zips && chapter.zips.length) {
+      var zwrap = document.createElement('span');
+      zwrap.className = 'chapter-zips';
+      chapter.zips.forEach(function (zname, zi) {
+        var za = document.createElement('a');
+        za.className = 'chapter-zip';
+        za.href = FULL_BASE + encodeURIComponent(zname);
+        za.setAttribute('download', zname);
+        var multi = chapter.zips.length > 1;
+        var zlv = document.createElement('span');
+        zlv.dataset.lang = 'lv';
+        zlv.textContent = multi ? ('⤓ Zip ' + (zi + 1) + '. daļa') : '⤓ Viss zip';
+        var zen = document.createElement('span');
+        zen.dataset.lang = 'en';
+        zen.textContent = multi ? ('⤓ Zip part ' + (zi + 1)) : '⤓ All as zip';
+        za.appendChild(zlv);
+        za.appendChild(zen);
+        zwrap.appendChild(za);
+      });
+      head.appendChild(zwrap);
+    }
     section.appendChild(head);
 
     var grid = document.createElement('div');
