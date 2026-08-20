@@ -633,8 +633,15 @@ span.amp[data-lang],
 /* === Reveal animations === */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+/* Drošības tīkls: ja reveal nenostrādā (mobilais/momentum scroll), .shown
+   piespiedu kārtā atklāj sekciju, lai bildes vienmēr ir redzamas un klikšķināmas */
+.reveal.shown {
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 .reveal.in {
   opacity: 1;

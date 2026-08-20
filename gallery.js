@@ -47,7 +47,7 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0, rootMargin: '600px 0px 600px 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
 
   // ---------- Galerija ----------
@@ -280,6 +280,14 @@
         var el = document.getElementById(id);
         if (el) el.classList.add('in');
       });
+      // Drošības tīkls telefonam: ja IntersectionObserver kādu nodaļu neatklāj
+      // (iOS momentum scroll), pēc 1.2s piespiedu atklāj visas palikušās, lai
+      // apakšējās bildes vienmēr ir redzamas un klikšķināmas.
+      setTimeout(function () {
+        document.querySelectorAll('.reveal:not(.in)').forEach(function (el) {
+          el.classList.add('shown');
+        });
+      }, 1200);
     });
 
   // atgriezties augšā
