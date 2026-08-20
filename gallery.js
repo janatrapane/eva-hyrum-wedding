@@ -51,7 +51,9 @@
   document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
 
   // ---------- Galerija ----------
-  var flat = []; // {file, chapter} lightbox navigācijai
+  var flat = []; // visi faili lightbox navigācijai (uzbūvēts no manifest pirms renderēšanas)
+  var fileToIndex = {}; // fails -> globālais indekss flat[] masīvā
+  var fileToChapter = {}; // fails -> nodaļas id (deep-link scroll)
   var lightbox = document.getElementById('lightbox');
   var lbImg = document.getElementById('lb-img');
   var lbCounter = document.getElementById('lb-counter');
@@ -72,6 +74,8 @@
     lbDownload.setAttribute('download', f);
     lightbox.hidden = false;
     document.body.style.overflow = 'hidden';
+    // dalāma saite: URL rāda tieši šo bildi (#p/<fails>)
+    try { history.replaceState(null, '', '#p/' + encodeURIComponent(f)); } catch (e) {}
     // priekšielāde blakus bildēm
     [idx - 1, idx + 1].forEach(function (i) {
       if (i >= 0 && i < flat.length) { (new Image()).src = previewUrl(flat[i]); }
@@ -82,6 +86,8 @@
     lbImg.src = '';
     document.body.style.overflow = '';
     current = -1;
+    // notīra bildes hash no URL
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
   }
   function step(d) {
     if (current < 0) return;
@@ -199,8 +205,7 @@
     function addBatch(n) {
       var slice = chapter.photos.slice(shown, shown + n);
       slice.forEach(function (f) {
-        var idx = flat.length;
-        flat.push(f);
+        var idx = fileToIndex[f]; // globālais indekss (flat[] jau uzbūvēts)
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.setAttribute('aria-label', f);
@@ -249,9 +254,20 @@
     observer.observe(section);
   }
 
-  fetch('gallery/manifest.json?v=after-9')
+  fetch('gallery/manifest.json?v=after-10')
     .then(function (r) { return r.json(); })
     .then(function (m) {
+      // Uzbūvē pilnu flat[] sarakstu no manifest PIRMS renderēšanas, lai
+      // dalāmā saite (#p/<fails>) strādā arī bildēm, kas vēl nav renderētas
+      // (aiz "Rādīt vēl"). Secība = ne-tukšo nodaļu bilžu konkatenācija.
+      m.chapters.forEach(function (ch) {
+        if (!ch.photos.length) return;
+        ch.photos.forEach(function (f) {
+          fileToIndex[f] = flat.length;
+          fileToChapter[f] = ch.id;
+          flat.push(f);
+        });
+      });
       // ātrā navigācija pa nodaļām
       var nav = document.getElementById('chapter-nav');
       if (nav) {
@@ -288,7 +304,29 @@
           el.classList.add('shown');
         });
       }, 1200);
+      // Deep-link: ja URL ir #p/<fails>, atver tieši to bildi lightbox'ā
+      openFromHash();
     });
+
+  // Atver bildi no URL hash (#p/<fails>). Strādā pat ja tās sīktēls vēl nav
+  // renderēts, jo flat[] jau satur visas bildes.
+  function openFromHash() {
+    var h = location.hash || '';
+    if (h.indexOf('#p/') !== 0) return;
+    var f = decodeURIComponent(h.slice(3));
+    if (!(f in fileToIndex)) return;
+    var chId = fileToChapter[f];
+    if (chId) {
+      var sec = document.getElementById('ch-' + chId);
+      if (sec) { sec.classList.add('shown'); sec.scrollIntoView(); }
+    }
+    openLb(fileToIndex[f]);
+  }
+  // Reaģē uz hash maiņu (piem. atpakaļ poga vai ielīmēta saite)
+  window.addEventListener('hashchange', function () {
+    if ((location.hash || '').indexOf('#p/') === 0) openFromHash();
+    else if (!lightbox.hidden) closeLb();
+  });
 
   // atgriezties augšā
   var toTop = document.getElementById('to-top');
