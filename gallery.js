@@ -249,7 +249,7 @@
     observer.observe(section);
   }
 
-  fetch('gallery/manifest.json?v=after-7')
+  fetch('gallery/manifest.json?v=after-8')
     .then(function (r) { return r.json(); })
     .then(function (m) {
       // ātrā navigācija pa nodaļām
