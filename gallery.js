@@ -254,7 +254,7 @@
     observer.observe(section);
   }
 
-  fetch('gallery/manifest.json?v=after-10')
+  fetch('gallery/manifest.json?v=after-11')
     .then(function (r) { return r.json(); })
     .then(function (m) {
       // Uzbūvē pilnu flat[] sarakstu no manifest PIRMS renderēšanas, lai
